@@ -27,3 +27,16 @@ CREATE TABLE Tweets (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
+
+CREATE TABLE Advertisements (
+  ad_id INT PRIMARY KEY AUTO_INCREMENT,
+  advertiser_id INT NOT NULL, -- Renommé pour clarifier
+  tweet_id INT NOT NULL,
+  budget DECIMAL(10,2) CHECK (budget >= 0),
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (advertiser_id) REFERENCES Users(user_id),
+  FOREIGN KEY (tweet_id) REFERENCES Tweets(tweet_id)
+);
