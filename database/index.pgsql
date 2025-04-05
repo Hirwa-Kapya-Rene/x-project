@@ -40,3 +40,17 @@ CREATE TABLE Advertisements (
   FOREIGN KEY (advertiser_id) REFERENCES Users(user_id),
   FOREIGN KEY (tweet_id) REFERENCES Tweets(tweet_id)
 );
+
+CREATE TABLE Reports (
+  report_id INT PRIMARY KEY AUTO_INCREMENT,
+  reporter_id INT NOT NULL,
+  reported_user_id INT,
+  reported_tweet_id INT,
+  reason TEXT NOT NULL,
+  status ENUM('en attente', 'validé', 'rejeté') DEFAULT 'en attente',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (reporter_id) REFERENCES Users(user_id),
+  FOREIGN KEY (reported_user_id) REFERENCES Users(user_id),
+  FOREIGN KEY (reported_tweet_id) REFERENCES Tweets(tweet_id)
+);
