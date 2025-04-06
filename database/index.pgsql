@@ -63,4 +63,8 @@ SELECT
   COUNT(DISTINCT l.like_id) AS likes_received,
   COUNT(DISTINCT r.retweet_id) AS retweets_received,
   (SELECT COUNT(*) FROM Followers f WHERE f.followed_id = u.user_id) AS followers_count
-
+  FROM Users u
+  LEFT JOIN Tweets t ON t.user_id = u.user_id
+  LEFT JOIN Likes l ON t.tweet_id = l.tweet_id
+  LEFT JOIN Retweets r ON t.tweet_id = r.tweet_id
+  GROUP BY u.user_id;
