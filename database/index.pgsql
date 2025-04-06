@@ -55,3 +55,12 @@ CREATE TABLE Reports (
   FOREIGN KEY (reported_tweet_id) REFERENCES Tweets(tweet_id)
 );
 
+CREATE VIEW User_Stats_View AS
+SELECT
+  u.user_id,
+  u.username,
+  COUNT(DISTINCT t.tweet_id) AS tweets_count,
+  COUNT(DISTINCT l.like_id) AS likes_received,
+  COUNT(DISTINCT r.retweet_id) AS retweets_received,
+  (SELECT COUNT(*) FROM Followers f WHERE f.followed_id = u.user_id) AS followers_count
+
