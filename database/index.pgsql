@@ -54,3 +54,4 @@ CREATE TABLE Reports (
   FOREIGN KEY (reported_user_id) REFERENCES Users(user_id),
   FOREIGN KEY (reported_tweet_id) REFERENCES Tweets(tweet_id)
 );
+
